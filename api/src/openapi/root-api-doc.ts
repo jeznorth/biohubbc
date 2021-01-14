@@ -1,4 +1,4 @@
-export const apiDoc = {
+export const rootAPIDoc = {
   openapi: '3.0.0',
   info: {
     version: '0.0.0',
