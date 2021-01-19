@@ -1,5 +1,6 @@
 import HomeRouter from 'features/home/HomeRouter';
 import ProjectsRouter from 'features/projects/ProjectsRouter';
+import ProjectBoundary from 'features/projects/ProjectBoundary';
 import AuthLayout from 'layouts/AuthLayout';
 import PublicLayout from 'layouts/PublicLayout';
 import AccessDenied from 'pages/403/AccessDenied';
@@ -33,6 +34,12 @@ const AppRouter: React.FC = () => {
         component={ProjectsRouter}
         layout={AuthLayout}
         title={getTitle('Projects')}
+      />
+      <AppRoute
+        protected
+        path="/imamap"
+        component={ProjectBoundary}
+        title={getTitle('Test Map')}
       />
       <AppRoute title="*" path="*" component={() => <Redirect to="/page-not-found" />} />
     </Switch>
