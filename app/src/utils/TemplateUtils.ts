@@ -20,7 +20,7 @@ import traverse from 'json-schema-traverse';
  * @enum {number}
  */
 export enum X_ENUM_CODE {
-  X_ENUM_CODE = 'x-enum-code',
+  X_ENUM_CODE_OBJ = 'x-enum-code',
   CODE_TABLE = 'x-enum-code-table',
   CODE_ID_COLUMN = 'x-enum-code-id-column',
   CODE_TEXT_COLUMN = 'x-enum-code-text-column'
@@ -43,7 +43,7 @@ export const populateTemplateWithCodes = (codes: object | null, template: object
     allKeys: true,
     cb: (schema, jsonPtr) => {
       // apply code enum filters if a `x-enum-code` field exists
-      if (Object.keys(schema).includes(X_ENUM_CODE.X_ENUM_CODE)) {
+      if (Object.keys(schema).includes(X_ENUM_CODE.X_ENUM_CODE_OBJ)) {
         // apply code enum filtering to this piece of schema
         const updatedSchema = applyCodeEnumFilter(schema, codes);
 
@@ -66,7 +66,7 @@ export const populateTemplateWithCodes = (codes: object | null, template: object
  */
 export const applyCodeEnumFilter = (schema: object, codes: object): object => {
   // prase the `x-enum-code` object
-  const xEnumCodeObj = schema[X_ENUM_CODE.X_ENUM_CODE];
+  const xEnumCodeObj = schema[X_ENUM_CODE.X_ENUM_CODE_OBJ];
 
   const codeTable = xEnumCodeObj[X_ENUM_CODE.CODE_TABLE];
   const codeIDColumn = xEnumCodeObj[X_ENUM_CODE.CODE_ID_COLUMN];

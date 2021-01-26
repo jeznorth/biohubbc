@@ -139,8 +139,8 @@ const CreateProjectPage: React.FC = () => {
           record={formStepState[index].formData}
           template={formStepState[index].formTemplate}
           onFormChange={(event) => {
-            setFormStepState((formStepState) => {
-              const newFormStepState = [...formStepState];
+            setFormStepState((currentFormStepState) => {
+              const newFormStepState = [...currentFormStepState];
               newFormStepState[index] = {
                 ...newFormStepState[index],
                 formData: event.formData,
