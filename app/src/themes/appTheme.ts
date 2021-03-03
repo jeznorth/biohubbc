@@ -27,13 +27,20 @@ const appTheme = createMuiTheme({
     fontSize: 16
   },
   overrides: {
+    MuiButton: {
+      root: {
+        textTransform: 'none'
+      }
+    },
     MuiTypography: {
       // https://material-ui.com/api/typography/
       h1: {
+        letterSpacing: '-0.01rem',
         fontSize: '2rem',
         fontWeight: 700
       },
       h2: {
+        letterSpacing: '-0.01rem',
         fontSize: '1.5rem',
         fontWeight: 700
       },
@@ -61,28 +68,52 @@ const appTheme = createMuiTheme({
         margin: 'auto'
       }
     },
-    MuiStepLabel: {
-      labelContainer: {
-        paddingLeft: '2.3rem'
-      }
-    },
-    MuiStepContent: {
-      root: {
-        paddingLeft: '4rem'
-      }
-    },
-    MuiStepIcon: {
-      root: {
-        fontSize: '2.5rem',
-        marginLeft: '-.525rem'
-      }
-    },
     MuiFormLabel: {
       asterisk: {
         color: '#db3131',
         '&$error': {
           color: '#db3131'
         }
+      }
+    },
+    MuiStepLabel: {
+      labelContainer: {
+        paddingLeft: '3rem'
+      },
+      iconContainer: {
+        width: '2rem',
+        height: '2rem',
+        paddingRight: 0,
+        border: '3px solid #003366',
+        borderRadius: '1rem'
+      }
+    },
+    MuiStepIcon: {
+      root: {
+        margin: '-1px',
+        color: '#003366'
+      },
+      text: {
+        color: '#003366',
+        fontWeight: 700
+      },
+      active: {
+        color: 'transparent'
+      }
+    },
+    MuiStepContent: {
+      root: {
+        marginTop: 0,
+        marginLeft: '1rem',
+        paddingTop: '1rem',
+        paddingBottom: 0,
+        paddingLeft: '4rem'
+      }
+    },
+    MuiStepConnector: {
+      vertical: {
+        marginLeft: '1rem',
+        padding: '0'
       }
     }
   }

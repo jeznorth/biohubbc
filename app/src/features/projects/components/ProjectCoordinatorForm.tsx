@@ -1,12 +1,15 @@
 import {
+  Box,
   FormControl,
   FormControlLabel,
   FormHelperText,
   FormLabel,
   Grid,
+  makeStyles,
   Radio,
   RadioGroup,
-  TextField
+  TextField,
+  Typography
 } from '@material-ui/core';
 import { useFormikContext } from 'formik';
 import React from 'react';
@@ -36,12 +39,22 @@ export const ProjectCoordinatorYupSchema = yup.object().shape({
   share_contact_details: yup.string().required('Required')
 });
 
+const useStyles = makeStyles((theme) => ({
+  legend: {
+    marginTop: '1rem',
+    float: 'left',
+    marginBottom: '0.75rem',
+    letterSpacing: '-0.01rem'
+  },
+}));
+
 /**
  * Create project - coordinator fields
  *
  * @return {*}
  */
 const ProjectCoordinatorForm: React.FC = () => {
+  const classes = useStyles();
   const { values, touched, errors, handleChange } = useFormikContext<IProjectCoordinatorForm>();
 
   return (
@@ -58,9 +71,6 @@ const ProjectCoordinatorForm: React.FC = () => {
           onChange={handleChange}
           error={touched.first_name && Boolean(errors.first_name)}
           helperText={errors.first_name}
-          InputLabelProps={{
-            shrink: true
-          }}
         />
       </Grid>
       <Grid item xs={12} md={6}>
@@ -75,9 +85,6 @@ const ProjectCoordinatorForm: React.FC = () => {
           onChange={handleChange}
           error={touched.last_name && Boolean(errors.last_name)}
           helperText={errors.last_name}
-          InputLabelProps={{
-            shrink: true
-          }}
         />
       </Grid>
       <Grid item xs={12}>
@@ -92,14 +99,12 @@ const ProjectCoordinatorForm: React.FC = () => {
           onChange={handleChange}
           error={touched.email_address && Boolean(errors.email_address)}
           helperText={errors.email_address}
-          InputLabelProps={{
-            shrink: true
-          }}
         />
       </Grid>
       <Grid item xs={12}>
         <TextField
           fullWidth
+          size="medium"
           required={true}
           id="coordinator_agency"
           name="coordinator_agency"
@@ -109,9 +114,6 @@ const ProjectCoordinatorForm: React.FC = () => {
           onChange={handleChange}
           error={touched.coordinator_agency && Boolean(errors.coordinator_agency)}
           helperText={errors.coordinator_agency}
-          InputLabelProps={{
-            shrink: true
-          }}
         />
       </Grid>
       <Grid item xs={12}>
@@ -119,16 +121,19 @@ const ProjectCoordinatorForm: React.FC = () => {
           required={true}
           component="fieldset"
           error={touched.share_contact_details && Boolean(errors.share_contact_details)}>
-          <FormLabel component="legend">Share Contact Details</FormLabel>
-          <RadioGroup
-            name="share_contact_details"
-            aria-label="Share Contact Details"
-            value={values.share_contact_details}
-            onChange={handleChange}>
-            <FormControlLabel value="false" control={<Radio required={true} />} label="No" />
-            <FormControlLabel value="true" control={<Radio required={true} />} label="Yes" />
-            <FormHelperText>{errors.share_contact_details}</FormHelperText>
-          </RadioGroup>
+          <FormLabel component="legend" className={classes.legend}>Share Contact Details</FormLabel>
+          <Typography>Do you want the project coordinator contact information visible to the public?</Typography>
+          <Box mt={2}>
+            <RadioGroup
+              name="share_contact_details"
+              aria-label="Share Contact Details"
+              value={values.share_contact_details}
+              onChange={handleChange}>
+              <FormControlLabel value="false" control={<Radio required={true} color="primary" />} label="No" />
+              <FormControlLabel value="true" control={<Radio required={true} color="primary" />} label="Yes" />
+              <FormHelperText>{errors.share_contact_details}</FormHelperText>
+            </RadioGroup>
+          </Box>
         </FormControl>
       </Grid>
     </Grid>
