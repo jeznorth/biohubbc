@@ -17,9 +17,9 @@ const appTheme = createMuiTheme({
       contrastText: '#000000'
     },
     text: {
-      primary: 'rgba(0, 0, 0, 0.87)',
+      primary: 'rgba(0, 0, 0, 100)',
       secondary: 'rgba(0, 0, 0, 0.67)',
-      disabled: 'rgba(0, 0, 0, 0.67)'
+      disabled: 'rgba(0, 0, 0, 0.67)',
     }
   },
   typography: {
@@ -69,6 +69,9 @@ const appTheme = createMuiTheme({
       }
     },
     MuiFormLabel: {
+      root: {
+        color: '#000000'
+      },
       asterisk: {
         color: '#db3131',
         '&$error': {
@@ -77,6 +80,9 @@ const appTheme = createMuiTheme({
       }
     },
     MuiStepLabel: {
+      label: {
+        color: '#000000'
+      },
       labelContainer: {
         paddingLeft: '3rem'
       },
