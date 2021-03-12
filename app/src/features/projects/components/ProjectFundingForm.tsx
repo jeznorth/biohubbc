@@ -75,7 +75,7 @@ const ProjectFundingForm: React.FC<IProjectFundingFormProps> = (props) => {
           Add Funding Source
         </Button>
       </Box>
-      <Box mt={4} mb={5}>
+      <Box mt={3} mb={5}>
         <Paper variant="outlined">
           <Grid container spacing={3} direction="column">
             <Grid container item direction="column">

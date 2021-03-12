@@ -185,36 +185,6 @@ const CreateProjectPage: React.FC = () => {
 
     setStepForms([
       {
-        stepTitle: 'Funding and Partnerships',
-        stepSubTitle: 'Specify funding and partnerships for the project',
-        stepContent: (
-          <ProjectFundingForm
-            funding_sources={
-              codes?.funding_source?.map((item) => {
-                return { value: item.id, label: item.name };
-              }) || []
-            }
-            investment_action_category={
-              codes?.investment_action_category?.map((item) => {
-                return { value: item.id, fs_id: item.fs_id, label: item.name };
-              }) || []
-            }
-            first_nations={
-              codes?.first_nations?.map((item) => {
-                return { value: item.id, label: item.name };
-              }) || []
-            }
-            stakeholder_partnerships={
-              codes?.funding_source?.map((item) => {
-                return { value: item.name, label: item.name };
-              }) || []
-            }
-          />
-        ),
-        stepValues: ProjectFundingFormInitialValues,
-        stepValidation: ProjectFundingFormYupSchema
-      },
-      {
         stepTitle: 'Project Coordinator',
         stepSubTitle: 'Enter contact details for the project coordinator',
         stepContent: (
@@ -333,7 +303,37 @@ const CreateProjectPage: React.FC = () => {
         ),
         stepValues: ProjectIUCNFormInitialValues,
         stepValidation: ProjectIUCNFormYupSchema
-      }
+      },
+      {
+        stepTitle: 'Funding and Partnerships',
+        stepSubTitle: 'Specify funding and partnerships for the project',
+        stepContent: (
+          <ProjectFundingForm
+            funding_sources={
+              codes?.funding_source?.map((item) => {
+                return { value: item.id, label: item.name };
+              }) || []
+            }
+            investment_action_category={
+              codes?.investment_action_category?.map((item) => {
+                return { value: item.id, fs_id: item.fs_id, label: item.name };
+              }) || []
+            }
+            first_nations={
+              codes?.first_nations?.map((item) => {
+                return { value: item.id, label: item.name };
+              }) || []
+            }
+            stakeholder_partnerships={
+              codes?.funding_source?.map((item) => {
+                return { value: item.name, label: item.name };
+              }) || []
+            }
+          />
+        ),
+        stepValues: ProjectFundingFormInitialValues,
+        stepValidation: ProjectFundingFormYupSchema
+      },
     ]);
   }, [codes, stepForms]);
 
