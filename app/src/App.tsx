@@ -1,4 +1,4 @@
-import { Box, CircularProgress, ThemeProvider } from '@material-ui/core';
+import { CircularProgress, ThemeProvider } from '@material-ui/core';
 // Strange looking `type {}` import below, see: https://github.com/microsoft/TypeScript/issues/36812
 import type {} from '@material-ui/lab/themeAugmentation'; // this allows `@material-ui/lab` components to be themed
 import { KeycloakProvider } from '@react-keycloak/web';
@@ -13,8 +13,7 @@ import getKeycloakEventHandler from 'utils/KeycloakEventHandler';
 
 const App: React.FC = () => {
   return (
-    <Box height="100vh" width="100vw" display="flex" overflow="hidden">
-      <ThemeProvider theme={appTheme}>
+    <ThemeProvider theme={appTheme}>
         <ConfigContextProvider>
           <ConfigContext.Consumer>
             {(config) => {
@@ -49,7 +48,6 @@ const App: React.FC = () => {
           </ConfigContext.Consumer>
         </ConfigContextProvider>
       </ThemeProvider>
-    </Box>
   );
 };
 

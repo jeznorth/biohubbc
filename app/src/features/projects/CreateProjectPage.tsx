@@ -7,7 +7,6 @@ import {
   Divider,
   Link,
   makeStyles,
-  Paper,
   Step,
   StepContent,
   StepLabel,
@@ -186,6 +185,32 @@ const CreateProjectPage: React.FC = () => {
 
     setStepForms([
       {
+        stepTitle: 'IUCN Classification',
+        stepSubTitle: 'Lorem ipsum dolor sit amet, consectur whatever whatever',
+        stepContent: (
+          <ProjectIUCNForm
+            classifications={
+              [
+                { id: 1, name: 'Class 1 Class 1 Class 1 Class 1 Class 1 Class 1' },
+                { id: 2, name: 'Class 2' }
+              ].map((item) => {
+                return { value: item.id, label: item.name };
+              }) || []
+            }
+            subClassifications={
+              [
+                { id: 1, name: 'Sub-class 1' },
+                { id: 2, name: 'Sub-class 2 Sub-class 2 Sub-class 2 Sub-class 2 Sub-class 2' }
+              ].map((item) => {
+                return { value: item.id, label: item.name };
+              }) || []
+            }
+          />
+        ),
+        stepValues: ProjectIUCNFormInitialValues,
+        stepValidation: ProjectIUCNFormYupSchema
+      },
+      {
         stepTitle: 'Project Coordinator',
         stepSubTitle: 'Enter contact details for the project coordinator',
         stepContent: (
@@ -278,32 +303,6 @@ const CreateProjectPage: React.FC = () => {
         ),
         stepValues: ProjectSpeciesFormInitialValues,
         stepValidation: ProjectSpeciesFormYupSchema
-      },
-      {
-        stepTitle: 'IUCN Classification',
-        stepSubTitle: 'Lorem ipsum dolor sit amet, consectur whatever whatever',
-        stepContent: (
-          <ProjectIUCNForm
-            classifications={
-              [
-                { id: 1, name: 'Class 1' },
-                { id: 2, name: 'Class 2' }
-              ].map((item) => {
-                return { value: item.id, label: item.name };
-              }) || []
-            }
-            subClassifications={
-              [
-                { id: 1, name: 'Sub-class 1' },
-                { id: 2, name: 'Sub-class 2' }
-              ].map((item) => {
-                return { value: item.id, label: item.name };
-              }) || []
-            }
-          />
-        ),
-        stepValues: ProjectIUCNFormInitialValues,
-        stepValidation: ProjectIUCNFormYupSchema
       },
       {
         stepTitle: 'Funding and Partnerships',
@@ -580,38 +579,48 @@ const CreateProjectPage: React.FC = () => {
           <Box>
             <Stepper activeStep={activeStep} orientation="vertical" className={classes.stepper}>
               {getProjectSteps()}
-            </Stepper>
-            {activeStep === numberOfSteps && (
-              <Paper square elevation={0} className={classes.finishContainer}>
-                <Box mb={3}>
-                  <Typography variant="h3">All steps complete!</Typography>
-                </Box>
-                <Box display="flex" justifyContent="space-between">
+              {activeStep === numberOfSteps && (
+              <Step completed className={'completedStep'}>
+                <StepLabel>
                   <Box>
-                    <Button
-                      variant="outlined"
-                      color="primary"
-                      onClick={goToPreviousStep}
-                      className={classes.actionButton}>
-                      Previous
-                    </Button>
+                    <Typography variant="h2" className={classes.stepTitle}>
+                      All Steps Complete!
+                    </Typography>
+                    <Typography variant="subtitle2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Typography>
                   </Box>
-                  <Box>
-                    <Button
-                      type="submit"
-                      variant="contained"
-                      color="primary"
-                      onClick={handleSubmit}
-                      className={classes.actionButton}>
-                      Create Project
-                    </Button>
-                    <Button variant="outlined" color="primary" onClick={handleCancel} className={classes.actionButton}>
-                      Cancel
-                    </Button>
+                </StepLabel>
+                <StepContent>
+                  <Box mt={2} mb={4}>
+                    <Divider />
                   </Box>
-                </Box>
-              </Paper>
+                  <Box display="flex" justifyContent="space-between">
+                    <Box>
+                      <Button
+                        variant="outlined"
+                        color="primary"
+                        onClick={goToPreviousStep}
+                        className={classes.actionButton}>
+                        Previous
+                      </Button>
+                    </Box>
+                    <Box>
+                      <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        onClick={handleSubmit}
+                        className={classes.actionButton}>
+                        Create
+                      </Button>
+                      <Button variant="outlined" color="primary" onClick={handleCancel} className={classes.actionButton}>
+                        Cancel
+                      </Button>
+                    </Box>
+                  </Box>
+                </StepContent>
+              </Step>
             )}
+            </Stepper>
           </Box>
         </Container>
       </Box>

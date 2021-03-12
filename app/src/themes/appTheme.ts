@@ -78,19 +78,19 @@ const appTheme = createMuiTheme({
     },
     MuiStepLabel: {
       labelContainer: {
-        paddingLeft: '3rem'
+        paddingLeft: '2rem'
       },
       iconContainer: {
-        width: '3rem',
-        height: '3rem',
+        width: '2.5rem',
+        height: '2.5rem',
         paddingRight: 0,
         borderRadius: '1.25rem'
       }
     },
     MuiStepIcon: {
       root: {
-        width: '3rem',
-        height: '3rem',
+        width: '2.5rem',
+        height: '2.5rem',
         color: '#003366'
       },
       text: {
@@ -105,15 +105,15 @@ const appTheme = createMuiTheme({
     MuiStepContent: {
       root: {
         marginTop: 0,
-        marginLeft: '1.5rem',
-        paddingTop: '1rem',
+        marginLeft: '1.25rem',
+        paddingTop: '0.5rem',
         paddingBottom: 0,
-        paddingLeft: '4.5rem'
+        paddingLeft: '3.25rem'
       }
     },
     MuiStepConnector: {
       vertical: {
-        marginLeft: '1.5rem',
+        marginLeft: '1.25rem',
         padding: '0'
       }
     }
