@@ -11,7 +11,7 @@ import {
   Button
 } from '@material-ui/core';
 import Icon from '@mdi/react';
-import { mdiTrashCanOutline } from '@mdi/js';
+import { mdiPlus, mdiTrashCanOutline } from '@mdi/js';
 import { FieldArray, useFormikContext } from 'formik';
 import { IMultiAutocompleteFieldOption } from 'components/fields/MultiAutocompleteFieldVariableSize';
 import React from 'react';
@@ -89,7 +89,7 @@ const ProjectIUCNForm: React.FC<IProjectIUCNFormProps> = (props: any) => {
 
                 return (
                   <Grid item xs={12} key={index}>
-                    <Box display="flex" alignItems="center" mt={-2}>
+                    <Box display="flex" mt={-2}>
                       <Box display="flex" className={classes.iucnInputContainer}>
                         <Box className={classes.iucnInput} my={2} pr={2}>
                           <FormControl variant="outlined" fullWidth>
@@ -157,8 +157,8 @@ const ProjectIUCNForm: React.FC<IProjectIUCNFormProps> = (props: any) => {
                           </FormControl>
                         </Box>
                       </Box>
-                      <Box pl={1}>
-                        <IconButton color="primary" aria-label="delete" onClick={() => arrayHelpers.remove(index)}>
+                      <Box pt={1} pl={1}>
+                        <IconButton color="primary" aria-label="delete classification" onClick={() => arrayHelpers.remove(index)}>
                           <Icon path={mdiTrashCanOutline} size={1} />
                         </IconButton>
                       </Box>
@@ -172,6 +172,7 @@ const ProjectIUCNForm: React.FC<IProjectIUCNFormProps> = (props: any) => {
                 type="button"
                 variant="outlined"
                 color="primary"
+                startIcon={<Icon path={mdiPlus} size={1} />}
                 aria-label="Add Another"
                 onClick={() => arrayHelpers.push(ProjectIUCNFormArrayItemInitialValues)}>
                 Add Classification

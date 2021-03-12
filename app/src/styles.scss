@@ -1,5 +1,9 @@
 @import 'styles/fonts.scss';
 
+body {
+  overflow-y: scroll;
+}
+
 legend.MuiFormLabel-root {
   font-weight: 700;
 }

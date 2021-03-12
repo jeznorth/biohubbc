@@ -24,7 +24,7 @@ const appTheme = createMuiTheme({
   },
   typography: {
     fontFamily: ['BCSans', 'Verdana', 'Arial', 'sans-serif'].join(','),
-    fontSize: 16
+    fontSize: 14
   },
   overrides: {
     MuiButton: {
@@ -45,8 +45,12 @@ const appTheme = createMuiTheme({
         fontWeight: 700
       },
       h3: {
+        letterSpacing: '-0.01rem',
         fontSize: '1.25rem',
         fontWeight: 700
+      },
+      body1: {
+        fontSize: '1rem'
       }
     },
     MuiCircularProgress: {
@@ -69,11 +73,29 @@ const appTheme = createMuiTheme({
       }
     },
     MuiFormLabel: {
+      root: {
+        fontSize: '1rem'
+      },
       asterisk: {
         color: '#db3131',
         '&$error': {
           color: '#db3131'
         }
+      }
+    },
+    MuiStepper: {
+      root: {
+        paddingRight: 0
+      }
+    },
+    MuiInputBase: {
+      root: {
+        background: '#ffffff'
+      }
+    },
+    MuiMenuItem: {
+      root: {
+        fontSize: '1rem'
       }
     },
     MuiStepLabel: {

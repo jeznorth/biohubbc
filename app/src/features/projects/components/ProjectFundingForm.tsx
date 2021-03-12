@@ -1,5 +1,7 @@
-import { Box, Button, Grid, IconButton, Paper, Typography } from '@material-ui/core';
+import { Box, Button, Grid, Paper, IconButton, Typography } from '@material-ui/core';
 import { Delete, Edit } from '@material-ui/icons';
+import Icon from '@mdi/react';
+import { mdiPlus } from '@mdi/js';
 import MultiAutocompleteFieldVariableSize, {
   IMultiAutocompleteFieldOption
 } from 'components/fields/MultiAutocompleteFieldVariableSize';
@@ -57,141 +59,147 @@ const ProjectFundingForm: React.FC<IProjectFundingFormProps> = (props) => {
 
   return (
     <form onSubmit={formikProps.handleSubmit}>
-      <Grid container spacing={3} direction="column">
-        <Grid item>
-          <Button
-            variant="outlined"
-            title="Add Funding Agency"
-            aria-label="Add Funding Agency"
-            onClick={() => {
-              setCurrentProjectFundingFormArrayItem({
-                index: values.funding_agencies.length,
-                values: ProjectFundingFormArrayItemInitialValues
-              });
-              setIsModalOpen(true);
-            }}>
-            Add Funding Agency
-          </Button>
-        </Grid>
-        <Grid container item direction="column">
-          <FieldArray
-            name="funding_agencies"
-            render={(arrayHelpers) => (
-              <Box>
-                <Box mb={2}>
-                  <ProjectFundingItemForm
-                    open={isModalOpen}
-                    onSubmit={(projectFundingItemValues, helper) => {
-                      if (currentProjectFundingFormArrayItem.index < values.funding_agencies.length) {
-                        // Update an existing item
-                        arrayHelpers.replace(currentProjectFundingFormArrayItem.index, projectFundingItemValues);
-                      } else {
-                        // Add a new item
-                        arrayHelpers.push(projectFundingItemValues);
-                      }
-                      // Reset the modal form
-                      helper.resetForm();
-                      // Close the modal
-                      setIsModalOpen(false);
-                    }}
-                    onClose={() => setIsModalOpen(false)}
-                    onCancel={() => setIsModalOpen(false)}
-                    initialValues={currentProjectFundingFormArrayItem.values}
-                    funding_sources={props.funding_sources}
-                    investment_action_category={props.investment_action_category}
-                  />
-                  {!values.funding_agencies.length && (
-                    <Paper>
-                      <Box p={3} display="flex" justifyContent="center" alignContent="middle">
+      <Box display="flex" flexDirection="row" alignItems="center" justifyContent="space-between">
+        <Typography variant="h3">Funding Sources</Typography>
+        <Button
+          color="primary"
+          variant="outlined"
+          startIcon={<Icon path={mdiPlus} size={1} />}
+          onClick={() => {
+            setCurrentProjectFundingFormArrayItem({
+              index: values.funding_agencies.length,
+              values: ProjectFundingFormArrayItemInitialValues
+            });
+            setIsModalOpen(true);
+          }}>
+          Add Funding Source
+        </Button>
+      </Box>
+      <Box mt={4} mb={5}>
+        <Paper variant="outlined">
+          <Grid container spacing={3} direction="column">
+            <Grid container item direction="column">
+              <FieldArray
+                name="funding_agencies"
+                render={(arrayHelpers) => (
+                  <Box>
+                    <ProjectFundingItemForm
+                      open={isModalOpen}
+                      onSubmit={(projectFundingItemValues, helper) => {
+                        if (currentProjectFundingFormArrayItem.index < values.funding_agencies.length) {
+                          // Update an existing item
+                          arrayHelpers.replace(currentProjectFundingFormArrayItem.index, projectFundingItemValues);
+                        } else {
+                          // Add a new item
+                          arrayHelpers.push(projectFundingItemValues);
+                        }
+                        // Reset the modal form
+                        helper.resetForm();
+                        // Close the modal
+                        setIsModalOpen(false);
+                      }}
+                      onClose={() => setIsModalOpen(false)}
+                      onCancel={() => setIsModalOpen(false)}
+                      initialValues={currentProjectFundingFormArrayItem.values}
+                      funding_sources={props.funding_sources}
+                      investment_action_category={props.investment_action_category}
+                    />
+                    {!values.funding_agencies.length && (
+                      <Box display="flex" justifyContent="center" alignContent="middle" p={3}>
                         <Typography>No Funding Sources</Typography>
                       </Box>
-                    </Paper>
-                  )}
-                  {values.funding_agencies.map((fundingAgency, index) => {
-                    return (
-                      <Box mb={3} key={index}>
-                        <Paper>
+                    )}
+                    {values.funding_agencies.map((fundingAgency, index) => {
+                      return (
+                        <Box mb={3} key={index}>
                           <Box m={3}>
-                            <Grid container item spacing={3}>
-                              <Grid container item spacing={3} justify="space-between" alignItems="center">
-                                <Grid item>
-                                  <Typography variant="h3">
-                                    {getCodeValueNameByID(props.funding_sources, fundingAgency.agency_id)}
-                                  </Typography>
+                              <Grid container item spacing={3}>
+                                <Grid container item spacing={3} justify="space-between" alignItems="center">
+                                  <Grid item>
+                                    <Typography variant="h3">
+                                      {getCodeValueNameByID(props.funding_sources, fundingAgency.agency_id)}
+                                    </Typography>
+                                  </Grid>
+                                  <Grid item>
+                                    <IconButton
+                                      title="Edit Funding Source"
+                                      aria-label="Edit Funding Source"
+                                      onClick={() => {
+                                        setCurrentProjectFundingFormArrayItem({
+                                          index: index,
+                                          values: values.funding_agencies[index]
+                                        });
+                                        setIsModalOpen(true);
+                                      }}>
+                                      <Edit />
+                                    </IconButton>
+                                    <IconButton
+                                      title="Delete Funding Source"
+                                      aria-label="Delete Funding Source"
+                                      onClick={() => arrayHelpers.remove(index)}>
+                                      <Delete />
+                                    </IconButton>
+                                  </Grid>
                                 </Grid>
-                                <Grid item>
-                                  <IconButton
-                                    title="Edit Funding Source"
-                                    aria-label="Edit Funding Source"
-                                    onClick={() => {
-                                      setCurrentProjectFundingFormArrayItem({
-                                        index: index,
-                                        values: values.funding_agencies[index]
-                                      });
-                                      setIsModalOpen(true);
-                                    }}>
-                                    <Edit />
-                                  </IconButton>
-                                  <IconButton
-                                    title="Delete Funding Source"
-                                    aria-label="Delete Funding Source"
-                                    onClick={() => arrayHelpers.remove(index)}>
-                                    <Delete />
-                                  </IconButton>
+                                <Grid container item spacing={3} xs={12}>
+                                  <Grid item xs={12} sm={6} md={4}>
+                                    <Typography variant="body2">Funding Amount</Typography>
+                                    <Typography variant="body1">{fundingAgency.funding_amount}</Typography>
+                                  </Grid>
+                                  <Grid item xs={12} sm={6} md={4}>
+                                    <Typography variant="body2">Start Date / End Date</Typography>
+                                    <Typography variant="body1">
+                                      {getFormattedDateRangeString(
+                                        DATE_FORMAT.MediumDateFormat,
+                                        fundingAgency.start_date,
+                                        fundingAgency.end_date
+                                      )}
+                                    </Typography>
+                                  </Grid>
+                                  <Grid item xs={12} sm={6} md={4}>
+                                    <Typography variant="body2">Agency Project ID</Typography>
+                                    <Typography variant="body1">{fundingAgency.agency_project_id}</Typography>
+                                  </Grid>
+                                  <Grid item xs={12} sm={6} md={4}>
+                                    <Typography variant="body2">Investment Action/Category</Typography>
+                                    <Typography variant="body1">{fundingAgency.investment_action_category}</Typography>
+                                  </Grid>
                                 </Grid>
                               </Grid>
-                              <Grid container item spacing={3} xs={12}>
-                                <Grid item xs={12} sm={6} md={4}>
-                                  <Typography variant="body2">Funding Amount</Typography>
-                                  <Typography variant="body1">{fundingAgency.funding_amount}</Typography>
-                                </Grid>
-                                <Grid item xs={12} sm={6} md={4}>
-                                  <Typography variant="body2">Start Date / End Date</Typography>
-                                  <Typography variant="body1">
-                                    {getFormattedDateRangeString(
-                                      DATE_FORMAT.MediumDateFormat,
-                                      fundingAgency.start_date,
-                                      fundingAgency.end_date
-                                    )}
-                                  </Typography>
-                                </Grid>
-                                <Grid item xs={12} sm={6} md={4}>
-                                  <Typography variant="body2">Agency Project ID</Typography>
-                                  <Typography variant="body1">{fundingAgency.agency_project_id}</Typography>
-                                </Grid>
-                                <Grid item xs={12} sm={6} md={4}>
-                                  <Typography variant="body2">Investment Action/Category</Typography>
-                                  <Typography variant="body1">{fundingAgency.investment_action_category}</Typography>
-                                </Grid>
-                              </Grid>
-                            </Grid>
-                          </Box>
-                        </Paper>
-                      </Box>
-                    );
-                  })}
-                </Box>
-              </Box>
-            )}
-          />
+                            </Box>
+                        </Box>
+                      );
+                    })}
+                  </Box>
+                )}
+              />
+            </Grid>
+          </Grid>
+        </Paper>
+      </Box>
+      <Box>
+        <Box mb={3}>
+          <Typography variant="h3">Partnerships (Optional)</Typography>
+        </Box>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <MultiAutocompleteFieldVariableSize
+              id={'indigenous_partnerships'}
+              label={'Indigenous Partnerships'}
+              options={props.first_nations}
+              required={false}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <MultiAutocompleteFieldVariableSize
+              id={'stakeholder_partnerships'}
+              label={'Stakeholder Partnerships'}
+              options={props.stakeholder_partnerships}
+              required={false}
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={12}>
-          <MultiAutocompleteFieldVariableSize
-            id={'indigenous_partnerships'}
-            label={'Indigenous Partnerships'}
-            options={props.first_nations}
-            required={false}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <MultiAutocompleteFieldVariableSize
-            id={'stakeholder_partnerships'}
-            label={'Stakeholder Partnerships'}
-            options={props.stakeholder_partnerships}
-            required={false}
-          />
-        </Grid>
-      </Grid>
+      </Box>
     </form>
   );
 };

@@ -9,6 +9,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     height: '100vh'
   },
+  appHeader: {
+    position: 'sticky',
+    top: 0
+  },
   appBody:{
     display: 'flex',
     flex: '1 1 auto',
@@ -26,7 +30,9 @@ const PublicLayout: React.FC = (props) => {
     <Box className={classes.appContainer}>
       <CssBaseline />
 
-      <Header />
+      <Box className={classes.appHeader} zIndex={1000}>
+        <Header />
+      </Box>
 
       <div className={classes.appBody}>
         <main>

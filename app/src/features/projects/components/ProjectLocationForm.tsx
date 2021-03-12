@@ -127,15 +127,13 @@ const ProjectLocationForm: React.FC<IProjectLocationFormProps> = (props) => {
         </Grid>
         <Grid item xs={12}>
           <Typography className={classes.bold}>Project Boundary</Typography>
-          <Box display="flex" mt={3}>
+          <Box mt={2}>
             <Button
               variant="outlined"
               component="label"
-              size="medium"
               color="primary"
               disabled={isLoading}
-              onClick={() => setUploadError('')}
-              style={{ border: '2px solid', textTransform: 'capitalize', fontWeight: 'bold' }}>
+              onClick={() => setUploadError('')}>
               <input
                 key={uuidv4()}
                 data-testid="file-upload"

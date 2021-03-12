@@ -185,30 +185,34 @@ const CreateProjectPage: React.FC = () => {
 
     setStepForms([
       {
-        stepTitle: 'IUCN Classification',
-        stepSubTitle: 'Lorem ipsum dolor sit amet, consectur whatever whatever',
+        stepTitle: 'Funding and Partnerships',
+        stepSubTitle: 'Specify funding and partnerships for the project',
         stepContent: (
-          <ProjectIUCNForm
-            classifications={
-              [
-                { id: 1, name: 'Class 1 Class 1 Class 1 Class 1 Class 1 Class 1' },
-                { id: 2, name: 'Class 2' }
-              ].map((item) => {
+          <ProjectFundingForm
+            funding_sources={
+              codes?.funding_source?.map((item) => {
                 return { value: item.id, label: item.name };
               }) || []
             }
-            subClassifications={
-              [
-                { id: 1, name: 'Sub-class 1' },
-                { id: 2, name: 'Sub-class 2 Sub-class 2 Sub-class 2 Sub-class 2 Sub-class 2' }
-              ].map((item) => {
+            investment_action_category={
+              codes?.investment_action_category?.map((item) => {
+                return { value: item.id, fs_id: item.fs_id, label: item.name };
+              }) || []
+            }
+            first_nations={
+              codes?.first_nations?.map((item) => {
                 return { value: item.id, label: item.name };
+              }) || []
+            }
+            stakeholder_partnerships={
+              codes?.funding_source?.map((item) => {
+                return { value: item.name, label: item.name };
               }) || []
             }
           />
         ),
-        stepValues: ProjectIUCNFormInitialValues,
-        stepValidation: ProjectIUCNFormYupSchema
+        stepValues: ProjectFundingFormInitialValues,
+        stepValidation: ProjectFundingFormYupSchema
       },
       {
         stepTitle: 'Project Coordinator',
@@ -305,34 +309,30 @@ const CreateProjectPage: React.FC = () => {
         stepValidation: ProjectSpeciesFormYupSchema
       },
       {
-        stepTitle: 'Funding and Partnerships',
-        stepSubTitle: 'Specify funding and partnerships for the project',
+        stepTitle: 'IUCN Classification',
+        stepSubTitle: 'Lorem ipsum dolor sit amet, consectur whatever whatever',
         stepContent: (
-          <ProjectFundingForm
-            funding_sources={
-              codes?.funding_source?.map((item) => {
+          <ProjectIUCNForm
+            classifications={
+              [
+                { id: 1, name: 'Class 1 Class 1 Class 1 Class 1 Class 1 Class 1' },
+                { id: 2, name: 'Class 2' }
+              ].map((item) => {
                 return { value: item.id, label: item.name };
               }) || []
             }
-            investment_action_category={
-              codes?.investment_action_category?.map((item) => {
-                return { value: item.id, fs_id: item.fs_id, label: item.name };
-              }) || []
-            }
-            first_nations={
-              codes?.first_nations?.map((item) => {
+            subClassifications={
+              [
+                { id: 1, name: 'Sub-class 1' },
+                { id: 2, name: 'Sub-class 2 Sub-class 2 Sub-class 2 Sub-class 2 Sub-class 2' }
+              ].map((item) => {
                 return { value: item.id, label: item.name };
-              }) || []
-            }
-            stakeholder_partnerships={
-              codes?.funding_source?.map((item) => {
-                return { value: item.name, label: item.name };
               }) || []
             }
           />
         ),
-        stepValues: ProjectFundingFormInitialValues,
-        stepValidation: ProjectFundingFormYupSchema
+        stepValues: ProjectIUCNFormInitialValues,
+        stepValidation: ProjectIUCNFormYupSchema
       }
     ]);
   }, [codes, stepForms]);
@@ -483,7 +483,7 @@ const CreateProjectPage: React.FC = () => {
               <Typography variant="h2" className={classes.stepTitle}>
                 {stepForms[index].stepTitle}
               </Typography>
-              <Typography variant="subtitle2">{stepForms[index].stepSubTitle}</Typography>
+              <Typography variant="body1">{stepForms[index].stepSubTitle}</Typography>
             </Box>
           </StepLabel>
           <StepContent>
